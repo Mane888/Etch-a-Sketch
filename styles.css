@@ -6,6 +6,7 @@
 
 section {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   height: 100vh;
   background-color: rgb(17, 2, 61);
@@ -18,15 +19,50 @@ section {
   background-color: white;
   height: 960px;
   width: 960px;
+  margin-right: 23%;
 }
 
 .divGrid  {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
   flex-basis: 6%;
-  border: 1px solid white;
+  border: 1px solid rgb(155, 155, 155);
   height: auto;
-  background-color: black;
+  background-color: white;
+}
+
+.resetBtn{
+  margin-right: auto;
+  margin-left: auto;
+  height: 50px;
+  width: 100px;
+  margin-bottom: 50px;
+  margin-left: 150px;
+  margin-right: 200px;
+  
+}
+
+.resetDiv {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  margin-top: 150px;
+}
+
+.rainbowBtn{
+  height: 50px;
+  width: 100px;
+  margin-left: 150px;
+  margin-right: 200px;
+}
+
+.blackBtn{
+  height: 50px;
+  width: 100px;
+  margin-top: 50px;
+  margin-left: 150px;
+  margin-right: 200px;
 }
