@@ -28,7 +28,6 @@ gridSwitch.addEventListener('click', () =>
       divGrid.classList.add('hideGrid');
       });
         document.querySelector('.grid-on-off').textContent = 'Grid OFF';
-        style.innerHTML = "#grid-switch::-webkit-slider-thumb { background-color: white}";
   }
   else if (val === '2')
   {
@@ -38,7 +37,6 @@ gridSwitch.addEventListener('click', () =>
       divGrid.classList.remove('hideGrid');     
       });
         document.querySelector('.grid-on-off').textContent = 'Grid ON';
-        style.innerHTML = "#grid-switch::-webkit-slider-thumb { background-color: rgba(255, 0, 0, 0.904)}"; 
   };
 });
 };
