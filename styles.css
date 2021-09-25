@@ -71,6 +71,14 @@ section {
   margin-right: 200px;
 }
 
+.eraserBtn{
+  height: 50px;
+  width: 100px;
+  margin-top: 50px;
+  margin-left: 150px;
+  margin-right: 200px;
+}
+
 #slider{
   -webkit-appearance: none;
   width: 150px;

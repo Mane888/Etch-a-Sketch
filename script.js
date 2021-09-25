@@ -7,6 +7,7 @@ const clearGrid = document.querySelector('.resetBtn');
 const rainbowBtn = document.querySelector('.rainbowBtn');
 const blueBtn = document.querySelector('.blueBtn');
 const shadingBtn = document.querySelector('.shadingBtn');
+const eraserBtn = document.querySelector('.eraserBtn');
 const slider = document.querySelector('#slider');
 const value = document.querySelector('.sliderValue');
 
@@ -31,14 +32,28 @@ rainbowBtn.addEventListener('click', () =>
   buttonStyles();
 });
 
+eraserBtn.addEventListener('click', () =>
+{
+  selectedColor = 'eraser';
+  buttonStyles();
+});
+
 
 //reset the grid to white background color
 clearGrid.addEventListener('click', ()=>
 {
   document.querySelectorAll('.divGrid').forEach(divGrid => {
-    divGrid.style.backgroundColor = 'rgba(255, 255, 255, 255)';
+    divGrid.style.backgroundColor = 'rgba(255, 255, 255, 1)';
   });
 });
+
+//removing all divs before creating new ones with the slider
+function removeAllChildNodes(parent)
+{
+  while(parent.firstChild){
+      parent.removeChild(parent.firstChild);
+  }
+};
 
 //dynamical creating of the grid via slider input
 slider.addEventListener('input', function()
@@ -58,6 +73,7 @@ slider.addEventListener('input', function()
   };
   buttonStyles();
 });
+
 
 //the loop for creating a set nuber of divs
 for (let i = 0; i < gridNumber * gridNumber; i++) 
@@ -99,7 +115,7 @@ function blueColor()
 function resetToWhite()
 {
   document.querySelectorAll('.divGrid').forEach(divGrid => {
-    divGrid.style.backgroundColor = 'rgba(255, 255, 255, 255)';
+    divGrid.style.backgroundColor = 'rgba(255, 255, 255, 1)';
   });
 };
 
@@ -108,43 +124,41 @@ function buttonStyles(){
   document.querySelectorAll('.divGrid').forEach(divGrid => {
     divGrid.addEventListener('mouseenter', () => {
       if(selectedColor){
-        if(selectedColor === 'white'){
+        if(selectedColor === 'white')
+        {
+          //pick a color on mouseenter and add 10% black to it until it's all black
           let color = window.getComputedStyle(divGrid).backgroundColor;
-      //shading
-      if(color.length == 18){
-        let r = (color.slice(4,7) * 0.9).toFixed(0);
-        let g = (color.slice(9,12) * 0.9).toFixed(0);
-        let b = (color.slice(14,17) * 0.9).toFixed(0);
-        let newShade = `rgba(${r},${g},${b},255)`;
-        divGrid.style.backgroundColor = newShade;
-        console.log(newShade);
-      }
-      else if(color.length == 15){
-        let r = (color.slice(4,6) * 0.7).toFixed(0);
-        let g = (color.slice(8,10) * 0.7).toFixed(0);
-        let b = (color.slice(12,14) * 0.7).toFixed(0);
-        let newShade = `rgba(${r},${g},${b},255)`;
-        divGrid.style.backgroundColor = newShade;
-      }
-      else if(color.length == 12){
-        let r = (color.slice(4,5) * 0.5).toFixed(0);
-        let g = (color.slice(7,8) * 0.5).toFixed(0);
-        let b = (color.slice(10,11) * 0.5).toFixed(0);
-        let newShade = `rgba(${r},${g},${b},255)`;
-        divGrid.style.backgroundColor = newShade;
-      }
-      }
-      else if (selectedColor === 'blue'){
+          const [r,g,b] = color.slice(4,color.length - 1).split(',');
+          rS = (r * 0.9).toFixed(1);
+          gS = (g * 0.9).toFixed(1);
+          bS = (b * 0.9).toFixed(1);
+          let newShade = `rgba(${rS},${gS},${bS},1)`;
+          divGrid.style.backgroundColor = newShade;
+        }
+        else if (selectedColor === 'blue')
+        {
         divGrid.style.backgroundColor = 'blue';
-      }
-      else{
+        }
+        else if (selectedColor === 'eraser')
+        {
+          let color = window.getComputedStyle(divGrid).backgroundColor;
+          console.log(color);
+          const [r,g,b] = color.slice(4,color.length - 1).split(',');
+          rS = (parseInt(r) + 5 * 1.2);
+          gS = (parseInt(g) + 5 * 1.2);
+          bS = (parseInt(b) + 5 * 1.2);
+          let newShade = `rgba(${rS},${gS},${bS},1)`;
+          divGrid.style.backgroundColor = newShade;
+          console.log(newShade);
+        }
+        else
+        {
         divGrid.style.backgroundColor = randomColor();
+        }
       }
-      }
+    });
   });
-});
-
-}
+};
 
 function removeAllChildNodes(parent)
 {
@@ -152,4 +166,3 @@ function removeAllChildNodes(parent)
       parent.removeChild(parent.firstChild);
   }
 };
-
