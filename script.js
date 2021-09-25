@@ -3,6 +3,7 @@ let gridNumber = 32;
 let selectedColor = null;
 let mainContainer = document.querySelector('.container');
 let divs = document.querySelectorAll('.divGrid');
+let style = document.querySelector('[data="thumb"]');
 const clearGrid = document.querySelector('.resetBtn');
 const rainbowBtn = document.querySelector('.rainbowBtn');
 const blueBtn = document.querySelector('.blueBtn');
@@ -10,6 +11,57 @@ const shadingBtn = document.querySelector('.shadingBtn');
 const eraserBtn = document.querySelector('.eraserBtn');
 const slider = document.querySelector('#slider');
 const value = document.querySelector('.sliderValue');
+const gridSwitch = document.querySelector('#grid-switch');
+
+
+//show/hide grid
+function gridOnOff(){
+gridSwitch.addEventListener('click', () => 
+  {
+  let val = document.querySelector('#grid-switch').value;
+  console.log(val);
+  if(val === '1')
+  {
+    gridSwitch.setAttribute('value', 2);
+    document.querySelectorAll('.divGrid').forEach(divGrid => 
+      {
+      divGrid.classList.add('hideGrid');
+      });
+        document.querySelector('.grid-on-off').textContent = 'Grid OFF';
+        style.innerHTML = "#grid-switch::-webkit-slider-thumb { background-color: white}";
+  }
+  else if (val === '2')
+  {
+    gridSwitch.setAttribute('value', 1);
+    document.querySelectorAll('.divGrid').forEach(divGrid => 
+      {
+      divGrid.classList.remove('hideGrid');     
+      });
+        document.querySelector('.grid-on-off').textContent = 'Grid ON';
+        style.innerHTML = "#grid-switch::-webkit-slider-thumb { background-color: rgba(255, 0, 0, 0.904)}"; 
+  };
+});
+};
+
+
+//function to keep the selected grid visibility while using the grid slider
+function abb()
+{
+  let val = document.querySelector('#grid-switch').value;
+    if(val === '2')
+    {
+    document.querySelectorAll('.divGrid').forEach(divGrid => {
+      divGrid.classList.add('hideGrid');
+      });
+    }
+    else if (val === '1')
+    {
+    document.querySelectorAll('.divGrid').forEach(divGrid => {
+      divGrid.classList.remove('hideGrid');     
+      }); 
+    };
+};
+  
 
 //shading button click event
 shadingBtn.addEventListener('click', () =>
@@ -18,6 +70,7 @@ shadingBtn.addEventListener('click', () =>
   buttonStyles();
 });
 
+
 //blue button click event
 blueBtn.addEventListener('click', () =>
 {
@@ -25,12 +78,14 @@ blueBtn.addEventListener('click', () =>
   buttonStyles();
 });
 
+
 //rainbow button click event
 rainbowBtn.addEventListener('click', () =>
 {
   selectedColor = 'random';
   buttonStyles();
 });
+
 
 eraserBtn.addEventListener('click', () =>
 {
@@ -47,6 +102,7 @@ clearGrid.addEventListener('click', ()=>
   });
 });
 
+
 //removing all divs before creating new ones with the slider
 function removeAllChildNodes(parent)
 {
@@ -54,6 +110,7 @@ function removeAllChildNodes(parent)
       parent.removeChild(parent.firstChild);
   }
 };
+
 
 //dynamical creating of the grid via slider input
 slider.addEventListener('input', function()
@@ -72,6 +129,7 @@ slider.addEventListener('input', function()
     mainContainer.appendChild(div);
   };
   buttonStyles();
+  abb();
 });
 
 
@@ -83,6 +141,7 @@ for (let i = 0; i < gridNumber * gridNumber; i++)
   mainContainer.appendChild(div); 
 };
 
+
 //random color generator
 function randomColor()
 {
@@ -90,6 +149,7 @@ function randomColor()
 
      return color;
 };
+
 
 //random color divs on mouseenter
 function rainbowColor()
@@ -101,6 +161,7 @@ document.querySelectorAll('.divGrid').forEach(divGrid => {
 });
 };
 
+
 //random color divs on mouseenter
 function blueColor()
 {
@@ -111,6 +172,7 @@ function blueColor()
   });
 };
 
+
 //reset grid to white
 function resetToWhite()
 {
@@ -118,6 +180,7 @@ function resetToWhite()
     divGrid.style.backgroundColor = 'rgba(255, 255, 255, 1)';
   });
 };
+
 
 //run the function with a button click, check which button it is and add the style
 function buttonStyles(){
@@ -160,9 +223,13 @@ function buttonStyles(){
   });
 };
 
+
 function removeAllChildNodes(parent)
 {
   while(parent.firstChild){
       parent.removeChild(parent.firstChild);
   }
 };
+
+
+gridOnOff();
