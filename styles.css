@@ -6,8 +6,6 @@
 
 section {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   height: 100vh;
   background-color: rgb(233, 233, 233);
   font-family: 'Press Start 2P', cursive;
@@ -19,7 +17,7 @@ button:hover {
   border: 4px solid rgba(0, 0, 0, 0.685);
   border-right-color: red;
   border-bottom-color: red;
-  
+  box-shadow: 10px 7px 0px 0px rgb(255 0 0 / 25%);
 }
 
 .container {
@@ -30,9 +28,25 @@ button:hover {
   height: 760px;
   width: 760px;
   margin-block: auto;
-  margin-inline-end: auto;
-  border: 2px solid rgba(0, 0, 0, 0.671);
+  border: 4px solid rgba(0, 0, 0, 0.671);
   border-radius: 3px;
+  border-left-color: red;
+  border-top-color: red;
+  box-shadow: 10px 10px 5px 0px rgb(0 0 0 / 3%);
+}
+
+.heading  {
+  width: auto;
+  margin: auto;
+  font-size: 50px;
+  line-height: 150px;
+  color: rgba(0, 0, 0, 0.692);
+}
+
+.red  {
+  display: inline;
+  color: red;
+  font-size: 50px;
 }
 
 .divGrid  {
@@ -132,19 +146,28 @@ button:hover {
   margin-top: 50px;
   margin-left: 125px;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.288);
+  border: 1px solid rgba(0, 0, 0, 0.541);
 }
 
 #slider::-webkit-slider-thumb {
   -webkit-appearance: none; 
   width: 25px; 
   height: 25px; 
-  background: rgba(0, 0, 0, 0.671); 
+  background: rgb(241, 62, 62); 
   border-radius: 15px;
-  border: 4px solid white;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #slider::-webkit-slider-thumb:hover {
+  -webkit-appearance: none; 
+  width: 25px; 
+  height: 25px; 
+  background: rgb(100, 95, 95); 
+  border-radius: 15px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+#slider::-moz-range-thumb {
   -webkit-appearance: none; 
   width: 25px; 
   height: 25px; 
@@ -153,24 +176,17 @@ button:hover {
   border: 4px solid rgba(0, 0, 0, 0.068);
 }
 
-#slider::-moz-range-thumb {
-  width: 25px; 
-  height: 25px; 
-  background: rgba(0, 0, 0, 0.671); 
-  border-radius: 50px;
-  border-radius: 15px;
-  border: 4px solid white;
-}
-
 .sliderValue  {
-  color: rgba(0, 0, 0, 0.795);
+  color: rgba(0, 0, 0, 0.692);
   margin-top: 20px;
-  margin-left: 180px;
+  font-size: 16px;
+  margin-left: 105px;
 }
 
 .grid-on-off  {
-  color: rgba(0, 0, 0, 0.795);
+  color: rgba(0, 0, 0, 0.753);
   margin-top: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
   margin-left: 148px;
 }
@@ -183,7 +199,7 @@ button:hover {
   margin-bottom: 35px;
   border: 3px solid black;
   border-radius: 10px;
-  background-color: rgba(3, 3, 3, 0.5);
+  background-color: rgba(3, 3, 3, 0.212);
   pointer-events: none;
 }
 

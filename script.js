@@ -13,48 +13,43 @@ const slider = document.querySelector('#slider');
 const value = document.querySelector('.sliderValue');
 const gridSwitch = document.querySelector('#grid-switch');
 
+gridOnOff();
+
 
 //show/hide grid
 function gridOnOff(){
-gridSwitch.addEventListener('click', () => 
-  {
+gridSwitch.addEventListener('click', () => {
   let val = document.querySelector('#grid-switch').value;
   console.log(val);
-  if(val === '1')
-  {
-    gridSwitch.setAttribute('value', 2);
-    document.querySelectorAll('.divGrid').forEach(divGrid => 
-      {
+
+  if(val === '1'){
+    document.querySelectorAll('.divGrid').forEach(divGrid => {
       divGrid.classList.add('hideGrid');
-      });
-        document.querySelector('.grid-on-off').textContent = 'Grid OFF';
+        });
+    document.querySelector('.grid-on-off').textContent = 'Grid OFF';
+    gridSwitch.setAttribute('value', 2);
   }
-  else if (val === '2')
-  {
-    gridSwitch.setAttribute('value', 1);
-    document.querySelectorAll('.divGrid').forEach(divGrid => 
-      {
+  else if (val === '2'){
+    document.querySelectorAll('.divGrid').forEach(divGrid => {
       divGrid.classList.remove('hideGrid');     
-      });
-        document.querySelector('.grid-on-off').textContent = 'Grid ON';
+        });
+    document.querySelector('.grid-on-off').textContent = 'Grid ON';
+    gridSwitch.setAttribute('value', 1);
   };
 });
 };
 
 
 //function to keep the selected grid visibility while using the grid slider
-function abb()
-{
+function gridOnOffSlider(){
   let val = document.querySelector('#grid-switch').value;
-    if(val === '2')
-    {
-    document.querySelectorAll('.divGrid').forEach(divGrid => {
+    if(val === '2'){
+      document.querySelectorAll('.divGrid').forEach(divGrid => {
       divGrid.classList.add('hideGrid');
       });
     }
-    else if (val === '1')
-    {
-    document.querySelectorAll('.divGrid').forEach(divGrid => {
+    else if (val === '1'){
+      document.querySelectorAll('.divGrid').forEach(divGrid => {
       divGrid.classList.remove('hideGrid');     
       }); 
     };
@@ -62,39 +57,35 @@ function abb()
   
 
 //shading button click event
-shadingBtn.addEventListener('click', () =>
-{
+shadingBtn.addEventListener('click', () =>  {
   selectedColor = 'white';
   buttonStyles();
 });
 
 
 //blue button click event
-blueBtn.addEventListener('click', () =>
-{
+blueBtn.addEventListener('click', () => {
   selectedColor = 'blue';
   buttonStyles();
 });
 
 
 //rainbow button click event
-rainbowBtn.addEventListener('click', () =>
-{
+rainbowBtn.addEventListener('click', () =>  {
   selectedColor = 'random';
   buttonStyles();
 });
 
 
-eraserBtn.addEventListener('click', () =>
-{
+//eraser button click event
+eraserBtn.addEventListener('click', () => {
   selectedColor = 'eraser';
   buttonStyles();
 });
 
 
 //reset the grid to white background color
-clearGrid.addEventListener('click', ()=>
-{
+clearGrid.addEventListener('click', ()=>  {
   document.querySelectorAll('.divGrid').forEach(divGrid => {
     divGrid.style.backgroundColor = 'rgba(255, 255, 255, 1)';
   });
@@ -102,67 +93,60 @@ clearGrid.addEventListener('click', ()=>
 
 
 //removing all divs before creating new ones with the slider
-function removeAllChildNodes(parent)
-{
+function removeAllChildNodes(parent)  {
   while(parent.firstChild){
       parent.removeChild(parent.firstChild);
-  }
+  };
 };
 
 
 //dynamical creating of the grid via slider input
-slider.addEventListener('input', function()
-{
+slider.addEventListener('input', function() {
   let sliderValue = document.querySelector('#slider').value;
-  //the slider value gets displayd in the P element under the slider
-  value.textContent = sliderValue;
-  gridNumber = sliderValue;
+    //the slider value gets displayd in the P element under the slider
+    value.textContent = `Grid size ${sliderValue}`;
+      gridNumber = sliderValue;
+  //removing divs before creating new ones to prevent overlaping
   removeAllChildNodes(mainContainer);
-  for (let i = 0; i < gridNumber * gridNumber; i++) 
-  {
-    let div = document.createElement('div');
-    div.classList.add('divGrid');
-    //here the slider value is used as value for grid columns and dows
-    mainContainer.setAttribute('style', `grid-template-columns: repeat(${sliderValue}, 1fr); grid-template-rows: repeat(${sliderValue}, 1fr);`);
-    mainContainer.appendChild(div);
-  };
+    for (let i = 0; i < gridNumber * gridNumber; i++) {
+      let div = document.createElement('div');
+        div.classList.add('divGrid');
+          //here the slider value is used as value for grid columns and rows
+          mainContainer.setAttribute('style', `grid-template-columns: repeat(${sliderValue}, 1fr); grid-template-rows: repeat(${sliderValue}, 1fr);`);
+            mainContainer.appendChild(div);
+    };
   buttonStyles();
-  abb();
+  gridOnOffSlider();
 });
 
 
 //the loop for creating a set nuber of divs
-for (let i = 0; i < gridNumber * gridNumber; i++) 
-{
+for (let i = 0; i < gridNumber * gridNumber; i++) {
   let div = document.createElement('div');
-  div.classList.add('divGrid');
-  mainContainer.appendChild(div); 
+    div.classList.add('divGrid');
+      mainContainer.appendChild(div); 
 };
 
 
 //random color generator
-function randomColor()
-{
-     color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
-
-     return color;
+function randomColor()  {
+  color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round  (Math.random()*255)+')';
+    return color;
 };
 
 
 //random color divs on mouseenter
-function rainbowColor()
-{
+function rainbowColor() {
 document.querySelectorAll('.divGrid').forEach(divGrid => {
   divGrid.addEventListener('mouseenter', () => {
     divGrid.style.backgroundColor = randomColor();
+    });
   });
-});
 };
 
 
 //random color divs on mouseenter
-function blueColor()
-{
+function blueColor()  {
   document.querySelectorAll('.divGrid').forEach(divGrid => {
     divGrid.addEventListener('mouseenter', () => {
       divGrid.style.backgroundColor = 'blue';
@@ -172,8 +156,7 @@ function blueColor()
 
 
 //reset grid to white
-function resetToWhite()
-{
+function resetToWhite() {
   document.querySelectorAll('.divGrid').forEach(divGrid => {
     divGrid.style.backgroundColor = 'rgba(255, 255, 255, 1)';
   });
@@ -222,12 +205,10 @@ function buttonStyles(){
 };
 
 
-function removeAllChildNodes(parent)
-{
+function removeAllChildNodes(parent)  {
   while(parent.firstChild){
-      parent.removeChild(parent.firstChild);
-  }
+    parent.removeChild(parent.firstChild);
+  };
 };
 
 
-gridOnOff();
